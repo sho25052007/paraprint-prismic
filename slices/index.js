@@ -2,5 +2,11 @@
 
 export const components = {
   home: () =>
-    import(/* webpackChunkName: "prismic__slices__home" */ "./Home/index.vue"),
+    import(
+      /* webpackChunkName: "prismic__slices__home" */ "./Navbar/index.vue"
+    ),
+  opening_text: () =>
+    import(
+      /* webpackChunkName: "prismic__slices__opening_text" */ "./OpeningText/index.vue"
+    ),
 };

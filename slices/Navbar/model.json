@@ -1,7 +1,7 @@
 {
   "id": "home",
   "type": "SharedSlice",
-  "name": "Home",
+  "name": "Navbar",
   "description": "Home",
   "variations": [
     {

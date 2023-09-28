@@ -5,7 +5,7 @@ import type * as prismicClient from "@prismicio/client";
 
 type Simplify<T> = { [KeyType in keyof T]: T[KeyType] };
 
-type HomepageDocumentDataSlicesSlice = HomeSlice;
+type HomepageDocumentDataSlicesSlice = OpeningTextSlice;
 
 /**
  * Content for Homepage documents
@@ -71,14 +71,44 @@ export type HomepageDocument<Lang extends string = string> =
     Lang
   >;
 
-export type AllDocumentTypes = HomepageDocument;
+type NavbarDocumentDataSlicesSlice = HomeSlice;
 
 /**
- * Primary content in *Home → Primary*
+ * Content for Navbar documents
+ */
+interface NavbarDocumentData {
+  /**
+   * Slice Zone field in *Navbar*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: navbar.slices[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#slices
+   */
+  slices: prismic.SliceZone<NavbarDocumentDataSlicesSlice>;
+}
+
+/**
+ * Navbar document from Prismic
+ *
+ * - **API ID**: `navbar`
+ * - **Repeatable**: `false`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type NavbarDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithUID<Simplify<NavbarDocumentData>, "navbar", Lang>;
+
+export type AllDocumentTypes = HomepageDocument | NavbarDocument;
+
+/**
+ * Primary content in *Navbar → Primary*
  */
 export interface HomeSliceDefaultPrimary {
   /**
-   * Heading field in *Home → Primary*
+   * Heading field in *Navbar → Primary*
    *
    * - **Field Type**: Rich Text
    * - **Placeholder**: *None*
@@ -89,7 +119,7 @@ export interface HomeSliceDefaultPrimary {
 }
 
 /**
- * Default variation for Home Slice
+ * Default variation for Navbar Slice
  *
  * - **API ID**: `default`
  * - **Description**: Default
@@ -102,18 +132,78 @@ export type HomeSliceDefault = prismic.SharedSliceVariation<
 >;
 
 /**
- * Slice variation for *Home*
+ * Slice variation for *Navbar*
  */
 type HomeSliceVariation = HomeSliceDefault;
 
 /**
- * Home Shared Slice
+ * Navbar Shared Slice
  *
  * - **API ID**: `home`
  * - **Description**: Home
  * - **Documentation**: https://prismic.io/docs/slice
  */
 export type HomeSlice = prismic.SharedSlice<"home", HomeSliceVariation>;
+
+/**
+ * Primary content in *OpeningText → Primary*
+ */
+export interface OpeningTextSliceDefaultPrimary {
+  /**
+   * Opener field in *OpeningText → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: opening_text.primary.opener
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  opener: prismic.RichTextField;
+}
+
+/**
+ * Primary content in *OpeningText → Items*
+ */
+export interface OpeningTextSliceDefaultItem {
+  /**
+   * Call To Action field in *OpeningText → Items*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: call to action button
+   * - **API ID Path**: opening_text.items[].call_to_action
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  call_to_action: prismic.RichTextField;
+}
+
+/**
+ * Default variation for OpeningText Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type OpeningTextSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<OpeningTextSliceDefaultPrimary>,
+  Simplify<OpeningTextSliceDefaultItem>
+>;
+
+/**
+ * Slice variation for *OpeningText*
+ */
+type OpeningTextSliceVariation = OpeningTextSliceDefault;
+
+/**
+ * OpeningText Shared Slice
+ *
+ * - **API ID**: `opening_text`
+ * - **Description**: OpeningText
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type OpeningTextSlice = prismic.SharedSlice<
+  "opening_text",
+  OpeningTextSliceVariation
+>;
 
 declare module "@prismicio/client" {
   interface CreateClient {
@@ -128,11 +218,19 @@ declare module "@prismicio/client" {
       HomepageDocument,
       HomepageDocumentData,
       HomepageDocumentDataSlicesSlice,
+      NavbarDocument,
+      NavbarDocumentData,
+      NavbarDocumentDataSlicesSlice,
       AllDocumentTypes,
       HomeSlice,
       HomeSliceDefaultPrimary,
       HomeSliceVariation,
       HomeSliceDefault,
+      OpeningTextSlice,
+      OpeningTextSliceDefaultPrimary,
+      OpeningTextSliceDefaultItem,
+      OpeningTextSliceVariation,
+      OpeningTextSliceDefault,
     };
   }
 }

@@ -18,7 +18,7 @@
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
-            "home": {
+            "opening_text": {
               "type": "SharedSlice"
             }
           }

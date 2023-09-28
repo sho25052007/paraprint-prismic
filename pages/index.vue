@@ -15,7 +15,6 @@ export default {
         const document = await $prismic.api.getByUID("homepage", "home")
 
         if (document) {
-            console.log(document.data)
             return { document }
         } else {
             error({ statusCode: 404, message: "Page not found" })
