@@ -1,0 +1,6 @@
+{
+  "repositoryName": "paraprint-prismic",
+  "adapter": "@slicemachine/adapter-nuxt2",
+  "libraries": ["./slices"],
+  "localSliceSimulatorURL": "http://localhost:3000/slice-simulator"
+}
