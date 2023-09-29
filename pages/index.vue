@@ -1,6 +1,12 @@
 <template>
-    <!-- <h1>{{ document.data.slices[0].primary.heading[0].text }}</h1> -->
-    <SliceZone :components="components" :slices="document.data.slices" />
+    <div class="opener">
+        <div class="opener_text">
+            <h1 class="text-4xl font-bold text-blue">
+                <PrismicRichText :field="document.data.opener_text" />
+            </h1>
+        </div>
+        <SliceZone :components="components" :slices="document.data.slices" />
+    </div>
 </template>
 
 <script>
@@ -8,7 +14,7 @@ import { components } from "~/slices"
 
 export default {
     name: "IndexPage",
-    data: function () {
+    data() {
         return { components }
     },
     async asyncData({ $prismic, error }) {

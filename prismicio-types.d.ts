@@ -12,6 +12,17 @@ type HomepageDocumentDataSlicesSlice = OpeningTextSlice;
  */
 interface HomepageDocumentData {
   /**
+   * Opener Text field in *Homepage*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: homepage.opener_text
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  opener_text: prismic.RichTextField;
+
+  /**
    * Slice Zone field in *Homepage*
    *
    * - **Field Type**: Slice Zone
@@ -71,12 +82,59 @@ export type HomepageDocument<Lang extends string = string> =
     Lang
   >;
 
-type NavbarDocumentDataSlicesSlice = HomeSlice;
+/**
+ * Item in *Navbar → Navlink*
+ */
+export interface NavbarDocumentDataNavlinkItem {
+  /**
+   * Link field in *Navbar → Navlink*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: navbar.navlink[].link
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  link: prismic.LinkField;
+
+  /**
+   * Label field in *Navbar → Navlink*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: navbar.navlink[].label
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  label: prismic.RichTextField;
+}
+
+type NavbarDocumentDataSlicesSlice = never;
 
 /**
  * Content for Navbar documents
  */
 interface NavbarDocumentData {
+  /**
+   * Navlink field in *Navbar*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: navbar.navlink[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  navlink: prismic.GroupField<Simplify<NavbarDocumentDataNavlinkItem>>;
+
+  /**
+   * Logo Text field in *Navbar*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: navbar.logo_text
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  logo_text: prismic.RichTextField;
+
   /**
    * Slice Zone field in *Navbar*
    *
@@ -104,79 +162,32 @@ export type NavbarDocument<Lang extends string = string> =
 export type AllDocumentTypes = HomepageDocument | NavbarDocument;
 
 /**
- * Primary content in *Navbar → Primary*
- */
-export interface HomeSliceDefaultPrimary {
-  /**
-   * Heading field in *Navbar → Primary*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: home.primary.heading
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
-   */
-  heading: prismic.RichTextField;
-}
-
-/**
- * Default variation for Navbar Slice
- *
- * - **API ID**: `default`
- * - **Description**: Default
- * - **Documentation**: https://prismic.io/docs/slice
- */
-export type HomeSliceDefault = prismic.SharedSliceVariation<
-  "default",
-  Simplify<HomeSliceDefaultPrimary>,
-  never
->;
-
-/**
- * Slice variation for *Navbar*
- */
-type HomeSliceVariation = HomeSliceDefault;
-
-/**
- * Navbar Shared Slice
- *
- * - **API ID**: `home`
- * - **Description**: Home
- * - **Documentation**: https://prismic.io/docs/slice
- */
-export type HomeSlice = prismic.SharedSlice<"home", HomeSliceVariation>;
-
-/**
- * Primary content in *OpeningText → Primary*
+ * Primary content in *ActionButton → Primary*
  */
 export interface OpeningTextSliceDefaultPrimary {
   /**
-   * Opener field in *OpeningText → Primary*
+   * Label field in *ActionButton → Primary*
    *
    * - **Field Type**: Rich Text
    * - **Placeholder**: *None*
-   * - **API ID Path**: opening_text.primary.opener
+   * - **API ID Path**: opening_text.primary.label
    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
-  opener: prismic.RichTextField;
-}
+  label: prismic.RichTextField;
 
-/**
- * Primary content in *OpeningText → Items*
- */
-export interface OpeningTextSliceDefaultItem {
   /**
-   * Call To Action field in *OpeningText → Items*
+   * Link field in *ActionButton → Primary*
    *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: call to action button
-   * - **API ID Path**: opening_text.items[].call_to_action
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: opening_text.primary.link
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
    */
-  call_to_action: prismic.RichTextField;
+  link: prismic.LinkField;
 }
 
 /**
- * Default variation for OpeningText Slice
+ * Default variation for ActionButton Slice
  *
  * - **API ID**: `default`
  * - **Description**: Default
@@ -185,16 +196,16 @@ export interface OpeningTextSliceDefaultItem {
 export type OpeningTextSliceDefault = prismic.SharedSliceVariation<
   "default",
   Simplify<OpeningTextSliceDefaultPrimary>,
-  Simplify<OpeningTextSliceDefaultItem>
+  never
 >;
 
 /**
- * Slice variation for *OpeningText*
+ * Slice variation for *ActionButton*
  */
 type OpeningTextSliceVariation = OpeningTextSliceDefault;
 
 /**
- * OpeningText Shared Slice
+ * ActionButton Shared Slice
  *
  * - **API ID**: `opening_text`
  * - **Description**: OpeningText
@@ -220,15 +231,11 @@ declare module "@prismicio/client" {
       HomepageDocumentDataSlicesSlice,
       NavbarDocument,
       NavbarDocumentData,
+      NavbarDocumentDataNavlinkItem,
       NavbarDocumentDataSlicesSlice,
       AllDocumentTypes,
-      HomeSlice,
-      HomeSliceDefaultPrimary,
-      HomeSliceVariation,
-      HomeSliceDefault,
       OpeningTextSlice,
       OpeningTextSliceDefaultPrimary,
-      OpeningTextSliceDefaultItem,
       OpeningTextSliceVariation,
       OpeningTextSliceDefault,
     };

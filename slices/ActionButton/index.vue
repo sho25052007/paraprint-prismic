@@ -3,13 +3,9 @@
         :data-slice-type="slice.slice_type"
         :data-slice-variation="slice.variation"
     >
-        <PrismicRichText :field="slice.primary.opener" />
-        <div class="action-card">
-            <PrismicRichText
-                v-for="actionBtn in slice.items"
-                :field="actionBtn"
-            />
-        </div>
+        <PrismicLink :field="slice.primary.link">
+            <PrismicRichText :field="slice.primary.label" />
+        </PrismicLink>
     </section>
 </template>
 
