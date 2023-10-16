@@ -1,5 +1,5 @@
 <template>
-    <div class="text-slate-800">
+    <div>
         <Header v-if="navbar.data" :navbar="navbar" />
         <main>
             <Nuxt />
@@ -31,7 +31,7 @@ export default {
 </script>
 
 <style>
-/* body {
-    @apply overflow-x-hidden antialiased;
-} */
+body {
+    font-family: industry, sans-serif;
+}
 </style>

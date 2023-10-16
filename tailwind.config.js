@@ -1,20 +1,17 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-    content: [
-        `${srcDir}/components/**/*.{vue,js,ts}`,
-        `${srcDir}/layouts/**/*.vue`,
-        `${srcDir}/pages/**/*.vue`,
-        `${srcDir}/composables/**/*.{js,ts}`,
-        `${srcDir}/plugins/**/*.{js,ts}`,
-        `${srcDir}/utils/**/*.{js,ts}`,
-        `${srcDir}/App.{js,ts,vue}`,
-        `${srcDir}/app.{js,ts,vue}`,
-        `${srcDir}/Error.{js,ts,vue}`,
-        `${srcDir}/error.{js,ts,vue}`,
-        `${srcDir}/app.config.{js,ts}`,
-    ],
+    content: ["./src/**/*.{js,vue}"],
     theme: {
-        extend: {},
+        fontFamily: {
+            body: ["industry", "sans-serif"],
+            display: ["miller-display", "serif"],
+        },
+        extend: {
+            colors: {
+                para: "#1976d2",
+                print: "#26a69a",
+            },
+        },
     },
     plugins: [],
 }

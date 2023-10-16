@@ -1,8 +1,11 @@
 <template>
     <div class="opener">
         <div class="opener_text">
-            <h1 class="text-4xl font-bold text-blue">
-                <PrismicRichText :field="document.data.opener_text" />
+            <h1 class="text-4xl font-bold text-red-500">
+                <PrismicRichText
+                    class="opener-text"
+                    :field="document.data.opener_text"
+                />
             </h1>
         </div>
         <SliceZone :components="components" :slices="document.data.slices" />
@@ -28,3 +31,9 @@ export default {
     },
 }
 </script>
+
+<style>
+.opener-text {
+    font-family: miller-display, serif;
+}
+</style>
