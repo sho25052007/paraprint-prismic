@@ -1,14 +1,14 @@
 <template>
-    <div class="opener">
-        <div class="opener_text">
-            <h1 class="text-4xl font-bold text-red-500">
+    <div class="opener m-10 flex flex-col items-center">
+        <div class="opener_text h-auto w-2/3 mt-24 mb-12">
+            <h1 class="text-3xl font-medium text-para">
                 <PrismicRichText
-                    class="opener-text"
+                    class="opener-text text-center"
                     :field="document.data.opener_text"
                 />
             </h1>
         </div>
-        <SliceZone :components="components" :slices="document.data.slices" />
+            <SliceZone :components="components" :slices="document.data.slices" class="flex flex-row flex-wrap items-center justify-evenly w-2/3"/>
     </div>
 </template>
 
@@ -33,7 +33,7 @@ export default {
 </script>
 
 <style>
-.opener-text {
+/* .opener-text {
     font-family: miller-display, serif;
-}
+} */
 </style>
